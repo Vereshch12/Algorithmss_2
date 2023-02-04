@@ -38,23 +38,50 @@ public class ListInegerTest {
     }
 
     @Test
-    public void addFullListExcepionTest() throws IntegerListException {
+    public void addFullListLengthTest() throws IntegerListException {
         Integer value1 = 1;
         Integer value2 = 2;
         Integer value3 = 3;
         Integer value4 = 4;
         Integer value5 = 5;
         Integer value6 = 6;
+        Integer value7 = 7;
         actual.add(value1);
         actual.add(value2);
         actual.add(value3);
         actual.add(value4);
         actual.add(value5);
         actual.add(value6);
+        actual.add(value7);
+        Integer expectedSize = 15;
+        Integer actualSize = actual.toArray().length;
+        assertEquals(expectedSize, actualSize);
+    }
+
+    @Test
+    public void addFullListResultTest() throws IntegerListException {
+        Integer value1 = 1;
+        Integer value2 = 2;
+        Integer value3 = 3;
+        Integer value4 = 4;
+        Integer value5 = 5;
+        Integer value6 = 6;
         Integer value7 = 7;
-        IntegerListException thrown = assertThrows(IntegerListException.class, () -> actual.add(value7), "Expected doThing() to throw, but it didn't"
-        );
-        assertTrue(thrown.getMessage().contentEquals("Лист уже заполнен!"));
+        actual.add(value1);
+        actual.add(value2);
+        actual.add(value3);
+        actual.add(value4);
+        actual.add(value5);
+        actual.add(value6);
+        actual.add(value7);
+        expected.add(value1);
+        expected.add(value2);
+        expected.add(value3);
+        expected.add(value4);
+        expected.add(value5);
+        expected.add(value6);
+        expected.add(value7);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -80,15 +107,22 @@ public class ListInegerTest {
         Integer value4 = 4;
         Integer value5 = 5;
         Integer value6 = 6;
-        actual.add(value1);
-        actual.add(value2);
-        actual.add(value3);
-        actual.add(value4);
-        actual.add(value5);
-        actual.add(value6);
         Integer value7 = 7;
-        IntegerListException thrown = assertThrows(IntegerListException.class, () -> actual.add(5,value7), "Expected doThing() to throw, but it didn't");
-        assertTrue(thrown.getMessage().contentEquals("Лист уже заполнен!"));
+        actual.add(3,value1);
+        actual.add(3,value2);
+        actual.add(3, value3);
+        actual.add(4, value4);
+        actual.add(4, value5);
+        actual.add(6, value6);
+        actual.add(7, value7);
+        expected.add(3, value1);
+        expected.add(3, value2);
+        expected.add(3, value3);
+        expected.add(4, value4);
+        expected.add(4, value5);
+        expected.add(6, value6);
+        expected.add(7, value7);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -285,5 +319,45 @@ public class ListInegerTest {
         ListInteger expected1 = new ListInteger(10);
         actual.clear();
         assertEquals(expected1, actual);
+    }
+
+    @Test
+    public void sortListWithSortInsertionTest() throws IntegerListException {
+        actual.add(9);
+        actual.add(5);
+        actual.add(12);
+        actual.add(1);
+        actual.add(7);
+        actual.add(122);
+        actual.add(15);
+        expected.add(1, 1);
+        expected.add(5);
+        expected.add(7);
+        expected.add(9);
+        expected.add(12);
+        expected.add(15);
+        expected.add(122);
+        actual.sortListWithSortInsertion();
+        assertEquals(actual, expected);
+    }
+
+    @Test
+    public void sortListWithMergeTest() throws IntegerListException {
+        actual.add(9);
+        actual.add(5);
+        actual.add(12);
+        actual.add(1);
+        actual.add(7);
+        actual.add(122);
+        actual.add(15);
+        expected.add(1, 1);
+        expected.add(5);
+        expected.add(7);
+        expected.add(9);
+        expected.add(12);
+        expected.add(15);
+        expected.add(122);
+        actual.sortListWithMerge();
+        assertEquals(actual, expected);
     }
 }

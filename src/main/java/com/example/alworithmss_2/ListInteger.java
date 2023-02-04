@@ -3,9 +3,9 @@ import java.util.Arrays;
 import java.util.Objects;
 
 public class ListInteger implements ListIntegerInteface {
-    private final Integer[] intList;
+    private Integer[] intList;
 
-    private final Integer size;
+    private Integer size;
 
     public ListInteger(Integer size) {
         this.size = size;
@@ -14,18 +14,23 @@ public class ListInteger implements ListIntegerInteface {
 
     @Override
     public Integer add(Integer number) throws IntegerListException {
+        if (intList[size-1] != null) {
+            grow();
+        }
         for (int i = 0; i < intList.length; i++) {
             if (intList[i] == null) {
                 intList[i] = number;
                 return number;
             }
         }
-        throw new IntegerListException("Лист уже заполнен!");
+        return number;
     }
 
     @Override
     public Integer add(int index, Integer number) throws IntegerListException {
-        if (intList[size-1] != null) throw new IntegerListException("Лист уже заполнен!");
+        if (intList[size-1] != null) {
+            grow();
+        }
         if (index >= size()){
             throw new IntegerListException("Индекс элемента превышевышает количество элементов!");
         }
@@ -175,15 +180,72 @@ public class ListInteger implements ListIntegerInteface {
         return result;
     }
 
-    private void sortList() throws IntegerListException {
-        for (int i = 1; i < intList.length; i++) {
-            int temp = intList[i];
+    public void sortListWithSortInsertion() throws IntegerListException {
+        for (int i = 1; i < size(); i++) {
+            int temp = get(i);
             int j = i;
-            while (j > 0 && intList[j-1] >= temp) {
-                set(j, intList[j-1]);
+            while (j > 0 && get(j - 1) >= temp) {
+                set(j, get(j-1));
                 j--;
             }
-            intList[j] = temp;
+            set(j, temp);
+        }
+    }
+
+    public void sortListWithMerge() throws IntegerListException {
+        if (size < 2) {
+            return;
+        }
+        Integer mid = size / 2;
+        Integer[] left = new Integer[mid];
+        Integer[] right = new Integer[size - mid];
+
+        for (int i = 0; i < left.length; i++) {
+            left[i] = get(i);
+        }
+
+        for (int i = 0; i < right.length; i++) {
+            right[i] = get(mid+ 1);
+        }
+        merge(left);
+        merge(right);
+        merge(left, right);
+    }
+
+    private void merge(Integer[] arr) throws IntegerListException {
+        if (arr.length < 2) {
+            return;
+        }
+        int mid = arr.length / 2;
+        Integer[] left = new Integer[mid];
+        Integer[] right = new Integer[arr.length - mid];
+        for (int i = 0; i < left.length; i++) {
+            left[i] = arr[i];
+        }
+
+        for (int i = 0; i < right.length; i++) {
+            right[i] = arr[i+1];
+        }
+    }
+
+    private void merge(Integer[] left, Integer[] right) throws IntegerListException {
+        Integer mainP = 0;
+        Integer leftP = 0;
+        Integer rightP = 0;
+        while (leftP < left.length && rightP < right.length) {
+            if (left[leftP] <= right[rightP]) {
+                set(mainP++, left[leftP++]);
+            } else {
+                set(mainP++, left[rightP++]);
+            }
+            if (mainP >= size()) break;
+        }
+        if (mainP >= size()) return;
+        while (leftP < left.length) {
+            set(mainP++, left[leftP++]);
+        }
+        while (rightP < right.length) {
+            set(mainP++, left[rightP++]);
         }
     }
 
@@ -205,6 +267,11 @@ public class ListInteger implements ListIntegerInteface {
             }
         }
         return false;
+    }
+
+    private void grow(){
+        this.size =(int) (size* 1.5);
+        this.intList = Arrays.copyOf(intList, size);
     }
 }
 
