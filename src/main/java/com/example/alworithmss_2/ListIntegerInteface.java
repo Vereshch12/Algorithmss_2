@@ -70,6 +70,6 @@ public interface ListIntegerInteface {
     // Создать новый массив
     // из строк в списке
     // и вернуть его.
-    Integer[] toArray();
+    Integer[] toArray() throws IntegerListException;
 
 }

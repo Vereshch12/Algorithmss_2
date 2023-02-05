@@ -33,8 +33,9 @@ public class ListInegerTest {
     public void addResultTest() throws IntegerListException {
         Integer value = 124;
         actual.add(value);
-        expected.add(value);
-        assertEquals(actual, expected);
+        Integer[] actualArray = actual.toArray();
+        Integer[] expectedArray = {1, 2, 3, 4, 124};
+        assertEquals(actualArray, expectedArray);
     }
 
     @Test
@@ -95,7 +96,9 @@ public class ListInegerTest {
     public void addWithIndexResultTest() throws IntegerListException {
         Integer value = 232;
         actual.add(2,value);
-        expected.add(2,value);
+        Integer[] actualArray = actual.toArray();
+        Integer[] expectedArray = {1, 2, 232, 3, 4};
+        assertEquals(actualArray, expectedArray);
         assertEquals(actual, expected);
     }
 
@@ -115,14 +118,9 @@ public class ListInegerTest {
         actual.add(4, value5);
         actual.add(6, value6);
         actual.add(7, value7);
-        expected.add(3, value1);
-        expected.add(3, value2);
-        expected.add(3, value3);
-        expected.add(4, value4);
-        expected.add(4, value5);
-        expected.add(6, value6);
-        expected.add(7, value7);
-        assertEquals(expected, actual);
+        Integer[] actualArray = actual.toArray();
+        Integer[] expectedArray = {1, 2, 3, 3, 5, 4, 6, 7, 2, 1, 4};
+        assertEquals(actualArray, expectedArray);
     }
 
     @Test
@@ -144,8 +142,9 @@ public class ListInegerTest {
     public void setResultTest() throws IntegerListException {
         Integer value = 43;
         actual.set(2,value);
-        expected.set(2,value);
-        assertEquals(actual, expected);
+        Integer[] actualArray = actual.toArray();
+        Integer[] expectedArray = {1, 2, 43, 4};
+        assertEquals(actualArray, expectedArray);
     }
 
     @Test
@@ -167,8 +166,9 @@ public class ListInegerTest {
     public void removeByItemResultTest() throws IntegerListException {
         Integer value = 2;
         actual.remove(value);
-        expected.remove(value);
-        assertEquals(actual, expected);
+        Integer[] actualArray = actual.toArray();
+        Integer[] expectedArray = {1, 3, 4};
+        assertEquals(actualArray, expectedArray);
     }
 
     @Test
@@ -189,8 +189,9 @@ public class ListInegerTest {
     @Test
     public void removeByIndexResultTest() throws IntegerListException {
         actual.remove(2);
-        expected.remove(2);
-        assertEquals(actual, expected);
+        Integer[] actualArray = actual.toArray();
+        Integer[] expectedArray = {1, 2, 4};
+        assertEquals(actualArray, expectedArray);
     }
 
     @Test

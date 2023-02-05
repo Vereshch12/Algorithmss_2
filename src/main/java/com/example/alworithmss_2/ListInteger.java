@@ -150,9 +150,11 @@ public class ListInteger implements ListIntegerInteface {
     }
 
     @Override
-    public Integer[] toArray() {
-        Integer[] intArray = new Integer[intList.length];
-        System.arraycopy(intList, 0, intArray, 0, intList.length);
+    public Integer[] toArray() throws IntegerListException {
+        Integer[] intArray = new Integer[size()];
+        for (int i = 0; i < size(); i++){
+            intArray[i] = get(i);
+        }
         return intArray;
     }
 
