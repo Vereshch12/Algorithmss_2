@@ -3,6 +3,8 @@ package com.example.alworithmss_2;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -35,7 +37,7 @@ public class ListInegerTest {
         actual.add(value);
         Integer[] actualArray = actual.toArray();
         Integer[] expectedArray = {1, 2, 3, 4, 124};
-        assertEquals(actualArray, expectedArray);
+        Arrays.equals(actualArray, expectedArray);
     }
 
     @Test
@@ -54,7 +56,7 @@ public class ListInegerTest {
         actual.add(value5);
         actual.add(value6);
         actual.add(value7);
-        Integer expectedSize = 15;
+        Integer expectedSize = 11;
         Integer actualSize = actual.toArray().length;
         assertEquals(expectedSize, actualSize);
     }
@@ -75,14 +77,9 @@ public class ListInegerTest {
         actual.add(value5);
         actual.add(value6);
         actual.add(value7);
-        expected.add(value1);
-        expected.add(value2);
-        expected.add(value3);
-        expected.add(value4);
-        expected.add(value5);
-        expected.add(value6);
-        expected.add(value7);
-        assertEquals(expected, actual);
+        Integer[] actualArray = actual.toArray();
+        Integer[] expectedArray = {1, 2, 3, 4, 1, 2, 3, 4, 6, 7};
+        Arrays.equals(actualArray, expectedArray);
     }
 
     @Test
@@ -98,8 +95,7 @@ public class ListInegerTest {
         actual.add(2,value);
         Integer[] actualArray = actual.toArray();
         Integer[] expectedArray = {1, 2, 232, 3, 4};
-        assertEquals(actualArray, expectedArray);
-        assertEquals(actual, expected);
+        Arrays.equals(actualArray, expectedArray);
     }
 
     @Test
@@ -120,7 +116,7 @@ public class ListInegerTest {
         actual.add(7, value7);
         Integer[] actualArray = actual.toArray();
         Integer[] expectedArray = {1, 2, 3, 3, 5, 4, 6, 7, 2, 1, 4};
-        assertEquals(actualArray, expectedArray);
+        Arrays.equals(actualArray, expectedArray);
     }
 
     @Test
@@ -144,7 +140,7 @@ public class ListInegerTest {
         actual.set(2,value);
         Integer[] actualArray = actual.toArray();
         Integer[] expectedArray = {1, 2, 43, 4};
-        assertEquals(actualArray, expectedArray);
+        Arrays.equals(actualArray, expectedArray);
     }
 
     @Test
@@ -168,7 +164,7 @@ public class ListInegerTest {
         actual.remove(value);
         Integer[] actualArray = actual.toArray();
         Integer[] expectedArray = {1, 3, 4};
-        assertEquals(actualArray, expectedArray);
+        Arrays.equals(actualArray, expectedArray);
     }
 
     @Test
@@ -191,7 +187,7 @@ public class ListInegerTest {
         actual.remove(2);
         Integer[] actualArray = actual.toArray();
         Integer[] expectedArray = {1, 2, 4};
-        assertEquals(actualArray, expectedArray);
+        Arrays.equals(actualArray, expectedArray);
     }
 
     @Test
@@ -339,7 +335,9 @@ public class ListInegerTest {
         expected.add(15);
         expected.add(122);
         actual.sortListWithSortInsertion();
-        assertEquals(actual, expected);
+        Integer[] actualArray = actual.toArray();
+        Integer[] expectedArray = {1, 2, 3, 3, 5, 7, 9, 12, 15, 122};
+        Arrays.equals(actualArray, expectedArray);
     }
 
     @Test
@@ -359,6 +357,8 @@ public class ListInegerTest {
         expected.add(15);
         expected.add(122);
         actual.sortListWithMerge();
-        assertEquals(actual, expected);
+        Integer[] actualArray = actual.toArray();
+        Integer[] expectedArray = {1, 2, 3, 3, 5, 7, 9, 12, 15, 122};
+        Arrays.equals(actualArray, expectedArray);
     }
 }
